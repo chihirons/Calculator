@@ -1,28 +1,28 @@
-import sys
-
-
-# 計算に必要な処理
-#  ・データを入力するフォームの作成
-#  ・入力データの処理
-# 四則演算の関数
-#  ・データの取得
-#  ・計算
-#  ・結果の返却
-# データ出力
-
-
 # 数値の入力
-def get_calc_line() -> str:
+def get_calc_input() -> str:
     """
     ユーザーから計算式を取得する。
 
     Returns
     -------
-    str
-        ユーザーが入力した計算式
+    str: get_first_number
+        される数
+    str: get_operator
+        演算子
+    str: get_second_number
+        する数
     """
-    print("計算を行います。\n 「5 + 8」 のように計算式を入力してください。")
-    return input("計算式を入力後、Enterを押下：")
+
+    print("==========[簡易電卓で計算を開始します。]===========\n")
+    get_first_number = input("初めの数値を指定してください。：")
+    get_operator = input("演算子を指定してください。(+ - * /)：")
+    get_second_number = input("最後の数値を指定してください。：")
+    print("")
+    return (
+        get_first_number,
+        get_operator,
+        get_second_number
+    )
 
 
 # 足し算の計算を実施
@@ -45,18 +45,45 @@ def division(get_left: int, get_right: int) -> int:
     return get_left / get_right
 
 
-# ユーザー入力文字列を取得し空白区切りでリスト変換
-user_input_list = get_calc_line().split()
-print(user_input_list)
+# 変数が値変換できるかのチェック
+def is_num(get_data):
+    try:
+        float(get_data)
+    except ValueError:
+        return False
+    else:
+        return True
 
-# 仮で入力チェックを実施
-if len(user_input_list) < 3:
-    print("入力された式は計算できません。")
-    sys.exit(255)
 
-# リストからデータを取り出し計算する。
-for list_data in user_input_list:
-    # 結果を格納する変数の用意
-    # データを格納していく変数を3つ用意
+# ユーザー入力情報の取得
+first_number, oeprand, second_number = get_calc_input()
 
-    pass
+# 数値のチェック
+if is_num(first_number) & is_num(second_number):
+    num_1 = float(first_number)
+    num_2 = float(second_number)
+
+    # 演算子の確認
+    if oeprand == "+":
+        result = addition(num_1, num_2)
+        print(f"{num_1} {oeprand} {num_2} = {result} \n")
+    elif oeprand == "-":
+        result = subtraction(num_1, num_2)
+        print(f"{num_1} {oeprand} {num_2} = {result} \n")
+    elif oeprand == "*":
+        result = multiplication(num_1, num_2)
+        print(f"{num_1} {oeprand} {num_2} = {result} \n")
+    elif oeprand == "/":
+        result = division(num_1, num_2)
+        print(f"{num_1} {oeprand} {num_2} = {result} \n")
+    else:
+        print("対応していない演算子です。\n")
+
+else:
+    print("ユーザーの入力値が誤っているため計算できませんでした。\n")
+    print(
+        f"入力された、初期値は：{first_number}、演算子は："
+        f"{oeprand}、最後の値は：{second_number}、です。\n"
+    )
+
+print("==========[簡易電卓を終了します。]===========\n")
