@@ -26,22 +26,22 @@ def get_calc_input() -> str:
 
 
 # 足し算の計算を実施
-def addition(get_left: int, get_right: int) -> int:
+def addition(get_left: float, get_right: float) -> float:
     return get_left + get_right
 
 
 # 引き算の計算を実施
-def subtraction(get_left: int, get_right: int) -> int:
+def subtraction(get_left: float, get_right: float) -> float:
     return get_left - get_right
 
 
 # 掛け算の計算を実施
-def multiplication(get_left: int, get_right: int) -> int:
+def multiplication(get_left: float, get_right: float) -> float:
     return get_left * get_right
 
 
 # 割り算の計算を実施
-def division(get_left: int, get_right: int) -> int:
+def division(get_left: float, get_right: float) -> float:
     return get_left / get_right
 
 
